@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Puedes agregar estilos globales aquí si lo necesitas */
 body {
   font-family: system-ui, sans-serif;
   background-color: #f9fafb;

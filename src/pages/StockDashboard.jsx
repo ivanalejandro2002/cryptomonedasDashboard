@@ -5,17 +5,20 @@ import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
+import "/src/css/styles.css";
+import styles from "/src/css/button.module.css";
+
 const cryptoList = [
-  { name: "Bitcoin", image: "/images/bitcoin.png" },
-  { name: "Ethereum", image: "/images/ethereum.png" },
-  { name: "Solana", image: "/images/solana.png" },
-  { name: "Cardano", image: "/images/cardano.png" },
-  { name: "Ripple", image: "/images/ripple.png" },
-  { name: "Polkadot", image: "/images/polkadot.png" },
-  { name: "Litecoin", image: "/images/litecoin.png" },
-  { name: "Dogecoin", image: "/images/dogecoin.png" },
-  { name: "Chainlink", image: "/images/chainlink.png" },
-  { name: "Avalanche", image: "/images/avalanche.png" }
+  { name: "Bitcoin", image: "/src/assets/images/bitcoin.png" },
+  { name: "Ethereum", image: "/src/assets/images/ethereum.svg" },
+  { name: "XRP", image: "/src/assets/images/xrp.png" },
+  { name: "Solana", image: "/src/assets/images/solana.png" },
+  { name: "TRON", image: "/src/assets/images/tron.png" },
+  { name: "Dogecoin", image: "/src/assets/images/dogecoin.png" },
+  { name: "Cardano", image: "/src/assets/images/cardano.png" },
+  { name: "Hyperliquid", image: "/src/assets/images/hyperliquid.png" },
+  { name: "Bitcoin Cash", image: "/src/assets/images/bitcoincash.png" },
+  { name: "Chainlink", image: "/src/assets/images/chainlink.png" }
 ];
 
 export default function StockDashboard() {
@@ -72,7 +75,7 @@ export default function StockDashboard() {
                   <img
                     src={crypto.image}
                     alt={crypto.name}
-                    className="w-6 h-6 rounded-full object-cover"
+                    className="w-6 h-6 rounded-full object-cover photo"
                   />
                   <h2 className="text-xl font-semibold">{crypto.name}</h2>
                 </div>
@@ -95,7 +98,7 @@ export default function StockDashboard() {
                     </LineChart>
                   </ResponsiveContainer>
                   <div className="mt-2 flex justify-end">
-                    <Button onClick={() => goToDetail(crypto.name)}>Ver más</Button>
+                    <Button className={styles.button} onClick={() => goToDetail(crypto.name)}>Ver más</Button>
                   </div>
                 </>
               )}
