@@ -48,6 +48,9 @@ export default function StockDashboard() {
 
   return (
     <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="title-span">
+        <label className="titular">Crypto Dashboard</label>
+      </div>
       <div className="col-span-full flex items-center gap-2 mb-4">
         <label className="font-bold">Rango de tiempo (horas):</label>
         <select
@@ -98,7 +101,7 @@ export default function StockDashboard() {
                     </LineChart>
                   </ResponsiveContainer>
                   <div className="mt-2 flex justify-end">
-                    <Button className={styles.button} onClick={() => goToDetail(crypto.name)}>Ver más</Button>
+                    <Button className="button" onClick={() => goToDetail(crypto.name)}>Ver más</Button>
                   </div>
                 </>
               )}
