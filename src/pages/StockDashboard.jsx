@@ -46,11 +46,19 @@ export default function StockDashboard() {
     navigate(`/crypto/${crypto}`);
   };
 
+  const goToCompare = () => {
+    navigate(`/compare`);
+  };
+
   return (
     <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="title-span">
         <label className="titular">Crypto Dashboard</label>
       </div>
+      <div className="mt-2 flex justify-end">
+        <Button className="button" onClick={() => goToCompare(crypto.name)}>Comparar Cryptos</Button>
+      </div>
+      
       <div className="col-span-full flex items-center gap-2 mb-4">
         <label className="font-bold">Rango de tiempo (horas):</label>
         <select
