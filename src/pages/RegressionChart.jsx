@@ -78,8 +78,8 @@ function generateTimeLabels(hours, samplesPerHour = 4) {
 
   return Array.from({ length: totalSamples }, (_, i) => {
     const date = new Date(now.getTime() - (totalSamples - 1 - i) * intervalMs);
-    return `${date.getDate().toString().padStart(2, "0")}/${
-      (date.getMonth() + 1).toString().padStart(2, "0")
+    return `${date.getMonth().toString().padStart(2, "0")}/${
+      (date.getDate() + 1).toString().padStart(2, "0")
     } ${date.getHours().toString().padStart(2, "0")}:${date
       .getMinutes()
       .toString()

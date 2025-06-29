@@ -9,8 +9,8 @@ function generateTimeLabels(hours) {
   const now = new Date();
   return Array.from({ length: hours }, (_, i) => {
     const date = new Date(now.getTime() - (hours - 1 - i) * 3600000);
-    return `${date.getDate().toString().padStart(2, "0")}/${
-      (date.getMonth() + 1).toString().padStart(2, "0")
+    return `${date.getMonth().toString().padStart(2, "0")}/${
+      (date.getDate() + 1).toString().padStart(2, "0")
     } ${date.getHours().toString().padStart(2, "0")}:00`;
   });
 }
