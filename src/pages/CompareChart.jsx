@@ -32,6 +32,23 @@ const cryptoColors = {
   Chainlink: "#E84142"
 };
 
+//Genera los tiempos de 15 en 15 minutos en reversa hasta cumplir la cuota
+function generateTimeLabels(hours, samplesPerHour = 4) {
+  const now = new Date();
+  const intervalMs = 3600000 / samplesPerHour;
+  const totalSamples = hours * samplesPerHour;
+
+  return Array.from({ length: totalSamples }, (_, i) => {
+    const date = new Date(now.getTime() - (totalSamples - 1 - i) * intervalMs);
+    return `${date.getDate().toString().padStart(2, "0")}/${
+      (date.getMonth() + 1).toString().padStart(2, "0")
+    } ${date.getHours().toString().padStart(2, "0")}:${date
+      .getMinutes()
+      .toString()
+      .padStart(2, "0")}`;
+  });
+}
+
 export default function CompareChart() {
   const navigate = useNavigate();
   const [selectedCryptos, setSelectedCryptos] = useState([]);
@@ -39,12 +56,14 @@ export default function CompareChart() {
   const [chartData, setChartData] = useState({});
   const [mergedData, setMergedData] = useState([]);
 
+  const labels = generateTimeLabels(selectedRange);
   useEffect(() => {
+    
     const mockData = {};
     cryptoList.forEach(({ name }) => {
       mockData[name] = Array.from({ length: selectedRange }, (_, i) => {
         const value = Math.random() * 100;
-        return { time: `${i}:00`, value };
+        return { time: labels[i], value };
       });
     });
     setChartData(mockData);
@@ -59,7 +78,7 @@ export default function CompareChart() {
     //Acá se hace la insersión de datos, por ahora se agarran unos randoms.
     const length = selectedRange;
     const result = Array.from({ length }, (_, i) => {
-      const time = `${i}:00`;
+      const time = labels[i];
       const point = { time };
       selectedCryptos.forEach((crypto) => {
         point[crypto] = chartData[crypto]?.[i]?.value || null;

@@ -70,6 +70,23 @@ function convertToXY(data) {
   }));
 }
 
+//Genera los tiempos de 15 en 15 minutos en reversa hasta cumplir la cuota
+function generateTimeLabels(hours, samplesPerHour = 4) {
+  const now = new Date();
+  const intervalMs = 3600000 / samplesPerHour;
+  const totalSamples = hours * samplesPerHour;
+
+  return Array.from({ length: totalSamples }, (_, i) => {
+    const date = new Date(now.getTime() - (totalSamples - 1 - i) * intervalMs);
+    return `${date.getDate().toString().padStart(2, "0")}/${
+      (date.getMonth() + 1).toString().padStart(2, "0")
+    } ${date.getHours().toString().padStart(2, "0")}:${date
+      .getMinutes()
+      .toString()
+      .padStart(2, "0")}`;
+  });
+}
+
 export default function RegressionChart() {
   const navigate = useNavigate();
   const { crypto } = useParams();
@@ -77,6 +94,9 @@ export default function RegressionChart() {
   const [data, setData] = useState([]);
   const [regressionData, setRegressionData] = useState([]);
   const [hoveredPoint, setHoveredPoint] = useState(null);
+
+  //Etiquetas generadas de forma aleatoria de cada hora de dato
+  const labels = generateTimeLabels(range);
 
   useEffect(() => {
     // Simulación de datos
@@ -126,7 +146,10 @@ export default function RegressionChart() {
         <HorizontalGridLines style={{ stroke: "#e0e0e0" }} />
         <XAxis
           title="Tiempo (horas)"
-          tickFormat={(v) => `${Math.floor(v/4)}:${15*(v%4)}`}
+
+          //labels[v] tendrá los timestamps de los datos
+          //hay otro más abajo
+          tickFormat={(v) => labels[v]}
           style={{
             text: { fill: "#555", fontWeight: 600, fontSize: 14 },
             title: { fontWeight: 700, fontSize: 16 },
@@ -177,7 +200,7 @@ export default function RegressionChart() {
               <div>
                 <strong>{hoveredPoint.type === "original" ? "Dato original" : "Regresión"}</strong>
               </div>
-              <div>Hora: {Math.floor(hoveredPoint.x/4)}:{15 *(hoveredPoint.x%4)}</div>
+              <div>Hora: {labels[hoveredPoint.x]}</div>
               <div>Valor: {hoveredPoint.y.toFixed(2)}</div>
             </div>
           </Hint>
