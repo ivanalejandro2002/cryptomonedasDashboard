@@ -32,7 +32,7 @@ export default function StockDashboard() {
     cryptoList.forEach((crypto) => {
       mockData[crypto.name] = Array.from({ length: selectedRange * 4 }, (_, i) => {
         const value = Math.random() * 100;
-        return { time: `${i}:00`, value };
+        return { time: `${Math.floor(i/4)}:${15*(i%4)}`, value };
       });
     });
     setChartData(mockData);
@@ -46,8 +46,9 @@ export default function StockDashboard() {
     navigate(`/crypto/${crypto}`);
   };
 
-  const goToCompare = () => {
-    navigate(`/compare`);
+
+  const goToStats = (crypto) => {
+    navigate(`/regression/${crypto}`);
   };
 
   return (
@@ -110,6 +111,7 @@ export default function StockDashboard() {
                   </ResponsiveContainer>
                   <div className="mt-2 flex justify-end">
                     <Button className="button" onClick={() => goToDetail(crypto.name)}>Ver más</Button>
+                    <Button className="button" onClick={() => goToStats(crypto.name)}>Estadísticas</Button>
                   </div>
                 </>
               )}
