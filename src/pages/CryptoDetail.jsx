@@ -4,6 +4,19 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianG
 import { Button } from "../components/ui/button";
 import styles from "/src/css/button.module.css";
 
+const cryptoColors = {
+  Bitcoin: "#F7931A",
+  Ethereum: "#3C3C3D",
+  Solana: "#00FFA3",
+  Cardano: "#0033AD",
+  Ripple: "#00AAE4",
+  Polkadot: "#E6007A",
+  Litecoin: "#A6A9AA",
+  Dogecoin: "#C2A633",
+  Chainlink: "#2A5ADA",
+  Avalanche: "#E84142",
+};
+
 //Genera los tiempos de 15 en 15 minutos en reversa hasta cumplir la cuota
 function generateTimeLabels(hours) {
   const now = new Date();
@@ -37,8 +50,14 @@ export default function CryptoDetail() {
 
   return (
     <div className="p-4">
+      <div className="flex items-center gap-2">
+          <h1 classname = "titular" >Detalles de:&nbsp;</h1>
+          <h1 classname = "titular" style={{ color: cryptoColors[cryptoName] }}>{cryptoName}</h1>
+      </div>
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl font-bold">Detalle de {cryptoName}</h1>
+        <div>
+          
+        </div>
         <Button className={styles.button} onClick={() => navigate("/")}>Volver</Button>
       </div>
       <ResponsiveContainer width="100%" height={400}>

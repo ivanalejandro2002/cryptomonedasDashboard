@@ -118,7 +118,6 @@ export default function RegressionChart() {
       <h2 className="text-3xl font-bold mb-6 text-center">{crypto} - Datos y Regresión</h2>
 
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl font-bold">Comparar criptomonedas</h1>
         <Button className="button" onClick={() => navigate("/")}>Volver</Button>
       </div>
 

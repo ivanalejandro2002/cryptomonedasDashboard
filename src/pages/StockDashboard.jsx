@@ -112,6 +112,18 @@ export default function StockDashboard() {
         const data = chartData[crypto.name] || [];
         const isRising =
           data.length >= 2 && data[data.length - 1].value > data[0].value;
+        
+        var rate= 0;
+        var lastValue = 0;
+        if(data.length>=2){
+          lastValue = data[data.length-1].value.toFixed(2);
+          if(isRising){
+            rate = ((data[data.length-1].value / data[0].value)-1)*100;
+          }else{
+            rate = -data[0].value / data[data.length -1].value;
+          }
+          rate = rate.toFixed(2);
+        }
 
         return (
           <Card key={idx} className="rounded-2xl shadow p-2">
@@ -126,7 +138,11 @@ export default function StockDashboard() {
                     alt={crypto.name}
                     className="w-6 h-6 rounded-full object-cover photo"
                   />
-                  <h2 className="text-xl font-semibold">{crypto.name}</h2>
+                  <h2 className="text-xl font-semibold">{crypto.name}&nbsp;</h2>
+                  {isRising ? 
+                    <h2 className="text-x1 font-semibold rising">${lastValue}&nbsp;({rate}%)</h2>:
+                    <h2 className="text-x1 font-semibold not-rising">${lastValue}&nbsp;({rate}%)</h2>
+                  }
                 </div>
                 {expandedCharts[crypto.name] ? <ChevronUp /> : <ChevronDown />}
               </div>
@@ -141,7 +157,16 @@ export default function StockDashboard() {
                         angle={-45}
                         height={50}
                       />
-                      <YAxis hide />
+                      <YAxis 
+                        label={{
+                          value: "Precio (USD)",
+                          angle: -90,
+                          position: "insideLeft",
+                          offset: 10,
+                          style: { textAnchor: "middle", fontSize: 12, fill: "#666" },
+                        }}
+                        width={80}
+                      />
                       <Tooltip formatter={(value) => `$${value.toFixed(2)}`} />
                       <Line
                         type="monotone"

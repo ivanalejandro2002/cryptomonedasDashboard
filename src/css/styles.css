@@ -21,3 +21,11 @@
     color: rgb(245, 140, 20);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+.rising{
+    color:rgb(24, 172, 24);
+}
+
+.not-rising{
+    color:rgb(247, 29, 29);
+}

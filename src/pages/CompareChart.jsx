@@ -109,7 +109,16 @@ export default function CompareChart() {
         <ResponsiveContainer width="100%" height={400}>
           <LineChart data={mergedData}>
             <XAxis dataKey="time" />
-            <YAxis />
+            <YAxis 
+              label={{
+                value: "Precio (USD)",
+                angle: -90,
+                position: "insideLeft",
+                offset: 10,
+                style: { textAnchor: "middle", fontSize: 12, fill: "#666" },
+              }}
+              width={80}
+            />
             <Tooltip />
             {selectedCryptos.map((crypto) => (
               <Line
